@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/message-in-a-bottle/static/css/main.073c9b0a.css",
-    "main.js": "/message-in-a-bottle/static/js/main.e33d55b1.js",
+    "main.js": "/message-in-a-bottle/static/js/main.d9d72c19.js",
     "index.html": "/message-in-a-bottle/index.html",
     "main.073c9b0a.css.map": "/message-in-a-bottle/static/css/main.073c9b0a.css.map",
-    "main.e33d55b1.js.map": "/message-in-a-bottle/static/js/main.e33d55b1.js.map"
+    "main.d9d72c19.js.map": "/message-in-a-bottle/static/js/main.d9d72c19.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.e33d55b1.js"
+    "static/js/main.d9d72c19.js"
   ]
 }
