@@ -24,6 +24,7 @@ export default function MapContainer() {
           lng: position.coords.longitude
         });
         setHeading(position.coords.heading);
+        console.log(randomMarkers);
         if (!randomMarkers)
           setRandomMarkers(generateRandomMarkers(position.coords.latitude, position.coords.longitude, 100));
         else {
