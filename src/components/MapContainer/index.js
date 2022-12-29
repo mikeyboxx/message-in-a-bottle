@@ -16,7 +16,8 @@ export default function MapContainer() {
   });
 
 
-  useEffect(()=>{
+  // useEffect(()=>{
+  const clickHandler = () => {
     navigator.geolocation.watchPosition(
       position => {
         setPosition({
@@ -39,8 +40,10 @@ export default function MapContainer() {
         enableHighAccuracy: true,
         timeout: 60000,
         maximumAge: Infinity
-      });
-  },[]);
+      }
+    );
+  }
+  // },[randomMarkers]);
 
   const onLoad = useCallback(
     function onLoad(map){
@@ -57,17 +60,22 @@ export default function MapContainer() {
     // mapTypeId: 'hybrid',
     // zoomControl: false,
   }
-  
   return (
     <>
+      {(!position ) && 
+          <button style={{height: 200, width: '50%', margin: 300}} onClick={clickHandler}>
+              Start Game
+          </button> } 
+         
+
       {error && 
         <div>Error in obtaining current location. ${error.message}</div>}  
 
       {loadError && 
         <div>Map cannot be loaded right now, sorry.</div>}  
       
-      {(!isLoaded || !position) && 
-        <h2>Loading...</h2>}
+      {(!map && position) && 
+        <h2>Loading Google Maps...</h2>}
       
       {(isLoaded && position) && 
         <GoogleMap
