@@ -57,14 +57,14 @@ const generateRandomMarkers = (lat, lng, distanceInMeters = 100)=>{
   return randomMarkers;
 }
 
-export const updateMarkerDistance = (lat, lng, markers) =>
-  markers.map(marker => {
-    console.log(marker);
+export const updateMarkerDistance = (lat, lng, markers) => {
+  return markers.map(marker => {
     return {
       position: marker.position,
       distance: getDistanceFromLatLonInMeters(lat, lng, marker.position.lat, marker.position.lng)
     }
   })
+}
 
 
 export default generateRandomMarkers;

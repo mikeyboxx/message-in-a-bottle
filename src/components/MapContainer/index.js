@@ -16,20 +16,29 @@ export default function MapContainer() {
   });
 
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
+    e.preventDefault();
+    console.log('click');
     navigator.geolocation.watchPosition(
       position => {
+       
+        console.log(randomMarkers);
+        let arr = [];
+        if (!randomMarkers) {
+          arr = generateRandomMarkers(position.coords.latitude, position.coords.longitude, 100);
+          console.log('!randomMarkers', arr);
+          setRandomMarkers(arr);
+        }
+        else {
+          arr = updateMarkerDistance(position.coords.latitude, position.coords.longitude, randomMarkers);
+          setRandomMarkers(arr);
+          console.log('randomMarkers', arr);
+        }
         setPosition({
           lat: position.coords.latitude,
           lng: position.coords.longitude
         });
         setHeading(position.coords.heading);
-        // console.log(randomMarkers);
-        if (!randomMarkers)
-          setRandomMarkers(generateRandomMarkers(position.coords.latitude, position.coords.longitude, 100));
-        else {
-          setRandomMarkers(updateMarkerDistance(position.coords.latitude, position.coords.longitude, randomMarkers));
-        }
       },
       error => {
         console.log(error);
