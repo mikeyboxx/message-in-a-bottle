@@ -53,6 +53,12 @@ export default function MapContainer() {
         //   setRandomMarkers(arr);
         //   console.log('randomMarkers', arr);
         // }
+        if (randomMarkers) {
+          const arr = updateMarkerDistance(pos.coords.latitude, pos.coords.longitude, randomMarkers);
+          setRandomMarkers(arr);
+          console.log('update', arr);
+        }
+
         setPosition({
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
