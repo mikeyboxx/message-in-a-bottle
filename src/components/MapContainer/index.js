@@ -15,30 +15,49 @@ export default function MapContainer() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
+  
+  useEffect(()=>{
+    console.log('useEffect');
+    console.log(position, heading, randomMarkers);
+    let arr = [];
+    if (position){
+      if (!randomMarkers) {
+        console.log('generate');
+        arr = generateRandomMarkers(position.lat, position.lng, 100);
+        setRandomMarkers(arr);
+      }
+      // } else {
+      //   console.log('update');
+      //   arr = updateMarkerDistance(position.lat, position.lng, randomMarkers);
+      //   setRandomMarkers(arr);
+      // }
+    }
+  },[position, heading, randomMarkers]);
 
   const clickHandler = (e) => {
     e.preventDefault();
     console.log('click');
     navigator.geolocation.watchPosition(
-      position => {
-       
-        console.log(randomMarkers);
-        let arr = [];
-        if (!randomMarkers) {
-          arr = generateRandomMarkers(position.coords.latitude, position.coords.longitude, 100);
-          console.log('!randomMarkers', arr);
-          setRandomMarkers(arr);
-        }
-        else {
-          arr = updateMarkerDistance(position.coords.latitude, position.coords.longitude, randomMarkers);
-          setRandomMarkers(arr);
-          console.log('randomMarkers', arr);
-        }
+      pos => {
+        console.log('watchPosition');
+        // console.log(pos.coords);
+        console.log(randomMarkers, position, heading);
+        // let arr = [];
+        // if (!randomMarkers) {
+        //   arr = generateRandomMarkers(pos.coords.latitude, pos.coords.longitude, 100);
+        //   console.log('!randomMarkers', arr);
+        //   setRandomMarkers(arr);
+        // }
+        // else {
+        //   arr = updateMarkerDistance(pos.coords.latitude, pos.coords.longitude, randomMarkers);
+        //   setRandomMarkers(arr);
+        //   console.log('randomMarkers', arr);
+        // }
         setPosition({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
         });
-        setHeading(position.coords.heading);
+        setHeading(pos.coords.heading);
       },
       error => {
         console.log(error);
@@ -109,7 +128,7 @@ export default function MapContainer() {
               }}   
             />
 
-            {randomMarkers.map((marker, idx) =>
+            {randomMarkers?.map((marker, idx) =>
               <Marker
                 key={idx}
                 position={marker.position}
