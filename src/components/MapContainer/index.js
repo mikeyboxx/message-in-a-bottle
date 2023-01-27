@@ -2,10 +2,10 @@ import { useEffect, useState, useCallback } from 'react';
 import {GoogleMap, Marker, InfoWindow} from '@react-google-maps/api';
 
 export default function MapContainer({randomMarkers, position }) {
-  console.log(position);
+  const [map, setMap] = useState(null);
 
   const mapOptions = {
-    zoom: 18,
+    zoom: map?.zoom || 18,
     center: {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
@@ -23,14 +23,21 @@ export default function MapContainer({randomMarkers, position }) {
     path: window.google.maps.SymbolPath.CIRCLE,
     scale: 8,
     strokeColor: 'rgb(255,255,255)',
-    strokeWeight: 2,
+    strokeWeight: 4,
   };
+
+  const onLoad = useCallback(
+    function onLoad(map){
+      setMap(map); 
+    },[])
 
   return (
     <>
       <GoogleMap
         options={mapOptions}
-        mapContainerStyle={{ height: '100vh', width: '100%' }} 
+        mapContainerStyle={{ height: '100vh', width: '100%' }}
+        onLoad={onLoad}
+        // onZoomChanged={setZoom(map?.zoom)}
       >
           <Marker
             position={{

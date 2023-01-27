@@ -103,6 +103,7 @@ export default function MapContainer() {
       {(isLoaded && position) && 
         <GoogleMap
           onLoad={onLoad}
+          
           options={mapOptions}
           mapContainerStyle={{ height: '100vh', width: '100%' }} 
         >
