@@ -14,9 +14,17 @@ export default function MapContainer({randomMarkers, position }) {
     mapId: '8dce6158aa71a36a',
     heading: position.coords.heading,
     tilt: 45
-    // mapTypeId: 'hybrid',
-    // zoomControl: false,
   }
+
+
+  const blueDot = {
+    fillColor: '#4285F4',
+    fillOpacity: 1,
+    path: window.google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    strokeColor: 'rgb(255,255,255)',
+    strokeWeight: 2,
+  };
 
   return (
     <>
@@ -29,19 +37,20 @@ export default function MapContainer({randomMarkers, position }) {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             }}
-            icon={{
-              fillColor: "red",
-              fillOpacity: .7,
-              scale: .05,
-              rotation: position.coords.heading,
-              //arrow
-              path: "M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z",
-              // path: "M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm11.3-395.3l112 112c4.6 4.6 5.9 11.5 3.5 17.4s-8.3 9.9-14.8 9.9H304v96c0 17.7-14.3 32-32 32H240c-17.7 0-32-14.3-32-32V256H144c-6.5 0-12.3-3.9-14.8-9.9s-1.1-12.9 3.5-17.4l112-112c6.2-6.2 16.4-6.2 22.6 0z",
-            }}
+            icon={blueDot}
+            // icon={{
+            //   fillColor: "#4285F4",
+            //   fillOpacity: 1,
+            //   scale: .05,
+            //   strokeColor: "rgb(255,255,255)",
+            //   strokeWeight: 2,
+            //   // rotation: position.coords.heading,
+            //   //arrow
+            //   path: "M160 256C160 202.1 202.1 160 256 160C309 160 352 202.1 352 256C352 309 309 352 256 352C202.1 352 160 309 160 256zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z",
+            //   // path: "M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z",
+            //   // path: "M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm11.3-395.3l112 112c4.6 4.6 5.9 11.5 3.5 17.4s-8.3 9.9-14.8 9.9H304v96c0 17.7-14.3 32-32 32H240c-17.7 0-32-14.3-32-32V256H144c-6.5 0-12.3-3.9-14.8-9.9s-1.1-12.9 3.5-17.4l112-112c6.2-6.2 16.4-6.2 22.6 0z",
+            // }}
           />
-
-
-
 
 
           {randomMarkers?.map((marker, idx) =>
