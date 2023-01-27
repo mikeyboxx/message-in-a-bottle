@@ -45,7 +45,7 @@ const generateRandomMarkers = (lat, lng, distanceInMeters = 100)=>{
   }
 
   for (let theta=0; theta<=360; theta += 10) {
-    const randomDistance = Math.floor(Math.random() * distanceInMeters) + 50;
+    const randomDistance = Math.floor(Math.random() * distanceInMeters) + 3;
     const {x, y} = circleXY(randomDistance, theta);
     const position = getLatLonGivenDistanceAndBearing(lat, lng, x, y );
     const distance = getDistanceFromLatLonInMeters(lat, lng, position.lat, position.lng);
