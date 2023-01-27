@@ -35,6 +35,7 @@ function getLatLonGivenDistanceAndBearing(lat, lon, x, y){
 }
 
 const generateRandomMarkers = (lat, lng, distanceInMeters = 100)=>{
+  console.log('generateRandomMarkers');
   const randomMarkers = [];
 
   const circleXY = (r, angle) => {
