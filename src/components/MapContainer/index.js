@@ -1,5 +1,6 @@
 import {useState, useCallback} from 'react';
 import {GoogleMap, Marker} from '@react-google-maps/api';
+import {updateMarkerDistance} from '../../utils/generateRandomMarkers';
 
 export default function MapContainer({randomMarkers, position }) {
   const [map, setMap] = useState(null);
@@ -38,6 +39,17 @@ export default function MapContainer({randomMarkers, position }) {
       setMap(map); 
     },[])
 
+
+  if(randomMarkers){
+    randomMarkers = updateMarkerDistance(position.coords.latitude, position.coords.longitude, randomMarkers);
+    randomMarkers = randomMarkers.map(el=> {
+      el.inProximity = el.distance <= 100;
+      return el;
+    })
+  }
+
+    console.log(randomMarkers);
+
   return (
     <>
       <GoogleMap
@@ -58,10 +70,10 @@ export default function MapContainer({randomMarkers, position }) {
           <Marker
             key={idx}
             position={marker.position}
-            icon={noteIcon}
+            icon={{...noteIcon, fillColor: marker.inProximity ? "red" : "black"}}
           />
         )}
-        
+
       </GoogleMap>
     </>
   )

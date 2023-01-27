@@ -19,7 +19,6 @@ function App() {
       pos => {
         setPosition(pos);
         console.log(pos);
-        
       },
       // need to handle err in html
       err => console.log(err),
