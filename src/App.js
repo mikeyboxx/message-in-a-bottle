@@ -17,10 +17,6 @@ function App() {
     // navigator.geolocation.getCurrentPosition(
     navigator.geolocation.watchPosition(
       pos => {
-        // setPosition({
-        //   lat: pos.coords.latitude,
-        //   lng: pos.coords.longitude
-        // });
         setPosition(pos);
         console.log(pos);
         
@@ -35,9 +31,11 @@ function App() {
     );
   },[]);
 
+  // generate random markers only once. the very first time, but wait first until gps position is aquired
   useEffect(()=>{
     // navigator.geolocation.getCurrentPosition(
     if (!randomMarkers && position) {
+      // generate random markers in a 100 feet radius from my position
       const arr = generateRandomMarkers(position.coords.latitude, position.coords.longitude, 100);
       setRandomMarkers(arr);
     }

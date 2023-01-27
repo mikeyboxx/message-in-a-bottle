@@ -3,6 +3,7 @@ import {GoogleMap, Marker, InfoWindow} from '@react-google-maps/api';
 
 export default function MapContainer({randomMarkers, position }) {
   console.log(position);
+
   const mapOptions = {
     zoom: 18,
     center: {
@@ -29,14 +30,19 @@ export default function MapContainer({randomMarkers, position }) {
               lng: position.coords.longitude,
             }}
             icon={{
-              fillColor: "black",
+              fillColor: "red",
               fillOpacity: .7,
               scale: .05,
               rotation: position.coords.heading,
               //arrow
-              path: "M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm11.3-395.3l112 112c4.6 4.6 5.9 11.5 3.5 17.4s-8.3 9.9-14.8 9.9H304v96c0 17.7-14.3 32-32 32H240c-17.7 0-32-14.3-32-32V256H144c-6.5 0-12.3-3.9-14.8-9.9s-1.1-12.9 3.5-17.4l112-112c6.2-6.2 16.4-6.2 22.6 0z",
+              path: "M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z",
+              // path: "M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm11.3-395.3l112 112c4.6 4.6 5.9 11.5 3.5 17.4s-8.3 9.9-14.8 9.9H304v96c0 17.7-14.3 32-32 32H240c-17.7 0-32-14.3-32-32V256H144c-6.5 0-12.3-3.9-14.8-9.9s-1.1-12.9 3.5-17.4l112-112c6.2-6.2 16.4-6.2 22.6 0z",
             }}
           />
+
+
+
+
 
           {randomMarkers?.map((marker, idx) =>
             <Marker
