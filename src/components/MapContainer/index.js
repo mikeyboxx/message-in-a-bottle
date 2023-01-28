@@ -2,12 +2,12 @@ import {useState, useCallback} from 'react';
 import {GoogleMap, Marker} from '@react-google-maps/api';
 import {updateMarkerDistance} from '../../utils/generateRandomMarkers';
 
-export default function MapContainer({randomMarkers, position }) {
+export default function MapContainer({distanceTravelled, randomMarkers, position }) {
   const [map, setMap] = useState(null);
 
   // google map options
   const mapOptions = {
-    zoom: map?.zoom || 18,
+    zoom: map?.zoom || 20,
     center: {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
@@ -46,18 +46,22 @@ export default function MapContainer({randomMarkers, position }) {
   // for every marker, re-calculate distance and set the flag if within 3 meters of the user
   if(randomMarkers){
     randomMarkers = updateMarkerDistance(position.coords.latitude, position.coords.longitude, randomMarkers);
+    
     randomMarkers = randomMarkers.map(el=> {
       el.inProximity = el.distance <= 20;
       return el;
     })
-    console.log(randomMarkers);
   }
 
   return (
     <>
       <GoogleMap
         options={mapOptions}
-        mapContainerStyle={{ height: '100vh', width: '100%' }}
+        mapContainerStyle={{ 
+          height: '100vh', 
+          width: '100%', 
+          position: 'relative' 
+        }}
         onLoad={onLoad}
       >
 
@@ -78,6 +82,40 @@ export default function MapContainer({randomMarkers, position }) {
         )}
 
       </GoogleMap>
+
+      <div 
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '300px',
+          height: '300px',
+          backgroundColor: 'black',
+          opacity: .3,
+          zIndex: 1,
+          color: 'white',
+          fontWeight: 'bold',
+          overflow: 'auto'
+        }}>
+          
+          <p style={{
+            color: 'white',
+            fontWeight: 'bold'
+            }}
+          >
+            Distance travelled: {distanceTravelled.toFixed(3)} meters
+          </p>
+
+          <ul>
+            {randomMarkers?.filter(marker => marker.inProximity === true)
+              ?.map((el, idx)=> 
+                <li key={idx}>
+                    Note #: {idx + 1} <br/> Distance: {el.distance.toFixed(3)} meters <hr/> 
+                </li>
+              )
+            }
+          </ul>  
+      </div>
     </>
   )
 }

@@ -2,22 +2,26 @@ import { useEffect, useState} from 'react';
 import {useLoadScript} from '@react-google-maps/api';
 import './App.css';
 import MapContainer from './components/MapContainer';
-import generateRandomMarkers from './utils/generateRandomMarkers';
+import generateRandomMarkers, {getDistanceFromLatLonInMeters} from './utils/generateRandomMarkers';
 
 
 function App() {
   const [position, setPosition] = useState(null);
   const [randomMarkers, setRandomMarkers] = useState(null);
+  const [distanceTravelled, setDistanceTravelled] = useState(0);
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
-  
+
   // first time get current gps position
   useEffect(()=>{
-    // navigator.geolocation.getCurrentPosition(
     navigator.geolocation.watchPosition(
       pos => {
-        setPosition(pos);
+        setPosition(oldPos=>{
+          const dist = getDistanceFromLatLonInMeters(oldPos?.coords.latitude, oldPos?.coords.longitude, pos.coords.latitude, pos.coords.longitude) || 0;
+          setDistanceTravelled(oldDistanceTravelled => oldDistanceTravelled + dist);
+          return pos;
+        });
         console.log(pos);
       },
       // need to handle err in html
@@ -34,7 +38,7 @@ function App() {
   useEffect(()=>{
     // navigator.geolocation.getCurrentPosition(
     if (!randomMarkers && position) {
-      // generate random markers in a 100 feet radius from my position
+      // generate random markers in a 100 feet radius from user's position
       const arr = generateRandomMarkers(position.coords.latitude, position.coords.longitude, 100);
       setRandomMarkers(arr);
     }
@@ -48,6 +52,7 @@ function App() {
 
         {position && isLoaded && 
           <MapContainer 
+            distanceTravelled={distanceTravelled}
             randomMarkers={randomMarkers} 
             position={position} />}
       </div>

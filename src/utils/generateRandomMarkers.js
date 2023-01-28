@@ -1,4 +1,4 @@
-const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
+export const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
   const deg2rad = deg => deg * (Math.PI/180);  // function to convert degress to radians
   // const R = 6371; // Radius of the earth in km
   const R=6378137 // meters
@@ -35,7 +35,6 @@ function getLatLonGivenDistanceAndBearing(lat, lon, x, y){
 }
 
 const generateRandomMarkers = (lat, lng, distanceInMeters = 100)=>{
-  console.log('generateRandomMarkers');
   const randomMarkers = [];
 
   const circleXY = (r, angle) => {
