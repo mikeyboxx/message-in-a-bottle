@@ -246,6 +246,7 @@ export default function MapContainer() {
               geolocation Heading: {position.coords.heading} <br/><br/>
               geolocation Speed: {position.coords.speed} <br/><br/>
               geolocation accuracy: {position.coords.accuracy} <br/><br/>
+              Number of notes in proximity: {randomMarkers?.filter(marker => marker.inProximity === true).length}  <br/><br/>
             </p>
             
 
