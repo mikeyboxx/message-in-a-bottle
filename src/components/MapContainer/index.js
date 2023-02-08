@@ -176,8 +176,9 @@ export default function MapContainer() {
         <GoogleMap
           options={{
             zoom: map?.zoom || 20,
-            // heading: position?.coords.heading,
-            heading: getHeading(prevPosition, position),
+            // heading: position?.coords.speed > 0 ? position?.coords.heading : 0,
+            heading: position?.coords.heading,
+            // heading: getHeading(prevPosition, position),
             center: distFromPrev > 10 
             ? {
               lat: position?.coords.latitude,
