@@ -204,7 +204,7 @@ export default function MapContainer() {
               lng: position.coords.longitude,
             }}
             icon={userIcon}
-          />}
+          />
 
           {randomMarkers?.map((marker, idx) =>
             <Marker
