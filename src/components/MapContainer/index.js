@@ -241,8 +241,11 @@ export default function MapContainer() {
             >
               SW Lat: {bounds?.SW.lat} <br/> SW Lng: {bounds?.SW.lng} <br/><br/>
               NE Lat: {bounds?.NE.lat} <br/> NE Lng: {bounds?.NE.lng} <br/><br/>
-              Distance from last location: {getDistance(prevPosition, position)} <br/>
-              Heading: {getHeading(prevPosition, position)} <br/><br/>
+              Distance from prev saved location: {getDistance(prevPosition, position)} <br/>
+              Calculated Heading: {getHeading(prevPosition, position)} <br/><br/>
+              geolocation Heading: {position.coords.heading} <br/><br/>
+              geolocation Speed: {position.coords.speed} <br/><br/>
+              geolocation accuracy: {position.coords.accuracy} <br/><br/>
             </p>
             
 
