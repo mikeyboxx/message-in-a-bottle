@@ -179,15 +179,20 @@ export default function MapContainer() {
             // heading: position?.coords.speed > 0 ? position?.coords.heading : 0,
             heading: position?.coords.heading,
             // heading: getHeading(prevPosition, position),
-            center: distFromPrev > 10 
-            ? {
+            center:  {
               lat: position?.coords.latitude,
               lng: position?.coords.longitude,
             } 
-            : {
-              lat: prevPosition?.coords.latitude,
-              lng: prevPosition?.coords.longitude,
-            } ,
+            ,
+            // center: distFromPrev > 10 
+            // ? {
+            //   lat: position?.coords.latitude,
+            //   lng: position?.coords.longitude,
+            // } 
+            // : {
+            //   lat: prevPosition?.coords.latitude,
+            //   lng: prevPosition?.coords.longitude,
+            // } ,
             disableDefaultUI: true,
             mapId: '8dce6158aa71a36a',
             tilt: 45
